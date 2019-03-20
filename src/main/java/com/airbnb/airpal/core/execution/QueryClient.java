@@ -3,6 +3,7 @@ package com.airbnb.airpal.core.execution;
 import com.airbnb.airpal.presto.QueryRunner;
 import com.facebook.presto.client.QueryResults;
 import com.facebook.presto.client.StatementClient;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Function;
 import com.google.common.base.Stopwatch;
 import io.dropwizard.util.Duration;
@@ -22,7 +23,8 @@ public class QueryClient
 
     public QueryClient(QueryRunner queryRunner, String query)
     {
-        this(queryRunner, Duration.seconds(60 * 30), query);
+        // 5 Hours
+        this(queryRunner, Duration.seconds(60 * 60 * 5), query);
     }
 
     public QueryClient(QueryRunner queryRunner, org.joda.time.Duration timeout, String query)
@@ -64,6 +66,7 @@ public class QueryClient
     public static class QueryTimeOutException extends Throwable
     {
         @Getter
+        @JsonProperty
         private final long elapsedMs;
     }
 }

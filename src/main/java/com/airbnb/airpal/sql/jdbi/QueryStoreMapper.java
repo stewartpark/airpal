@@ -4,6 +4,7 @@ import com.airbnb.airpal.api.queries.FeaturedQuery;
 import com.airbnb.airpal.api.queries.SavedQuery;
 import com.airbnb.airpal.api.queries.UserSavedQuery;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.MapperFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;

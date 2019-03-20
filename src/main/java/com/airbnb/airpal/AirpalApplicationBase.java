@@ -15,6 +15,7 @@ import com.airbnb.airpal.resources.TablesResource;
 import com.airbnb.airpal.resources.UserResource;
 import com.airbnb.airpal.resources.UsersResource;
 import com.airbnb.airpal.resources.sse.SSEEventSourceServlet;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -31,6 +32,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 import org.eclipse.jetty.server.Handler;
+import com.hubspot.rosetta.Rosetta;
 
 import javax.servlet.ServletRegistration;
 
@@ -120,5 +122,8 @@ public abstract class AirpalApplicationBase<T extends AirpalConfiguration>
                 ((BiDiGzipHandler) handler).addExcludedMimeTypes(SERVER_SENT_EVENTS);
             }
         });
+
+        environment.getObjectMapper().disable(MapperFeature.AUTO_DETECT_GETTERS);
+        Rosetta.getMapper().disable(MapperFeature.AUTO_DETECT_GETTERS);
     }
 }

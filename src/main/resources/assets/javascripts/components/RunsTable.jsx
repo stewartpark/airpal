@@ -180,6 +180,16 @@ function getColumns(forCurrentUser) {
   ]);
 }
 
+function formatDuration(ms) {
+  if (ms > 60 * 60 * 1000) { // Hours
+    return (1.0 * ms / (60 * 60 * 1000)).toFixed(2) + "h";
+  } else if (ms > 60 * 1000) { // Minutes
+    return (1.0 * ms / (60 * 1000)).toFixed(2) + "m";
+  } else { // Seconds
+    return (1.0 * ms / 1000).toFixed(2) + "s";
+  }
+}
+
 function formatRun(run, currentUser) {
   if (!run) return;
   return {
@@ -187,7 +197,7 @@ function formatRun(run, currentUser) {
     query: run.query,
     status: run.state,
     started: run.queryStarted,
-    duration: run.queryStats && run.queryStats.elapsedTime,
+    duration: formatDuration((run.queryFinished || +new Date()) - run.queryStarted),
     output: run.output && run.output,
     _run: run,
     _currentUser: currentUser

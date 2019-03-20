@@ -11,7 +11,7 @@ plugins {
 }
 
 ext {
-    prestoVersion = "0.145"
+    prestoVersion = "0.161"
     if (System.properties['airpal.prestoVersion'] != null) {
         prestoVersion = System.properties['airpal.prestoVersion']
     }
